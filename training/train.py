@@ -155,7 +155,7 @@ def main():
     
     # If we resumed, we might want to load optimizer state if it exists
     if latest_checkpoint:
-         optimizer_path = os.path.join(latest_checkpoint, "optimizer.pt")
+         optimizer_path = os.path.join(latest_checkpoint, "optimizer.bin")
          if os.path.exists(optimizer_path):
              logger.info(f"Loading optimizer state from {optimizer_path}")
              optimizer.load_state_dict(torch.load(optimizer_path))

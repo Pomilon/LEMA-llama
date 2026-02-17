@@ -271,7 +271,7 @@ def generate_lema_examples(n: int) -> List[Example]:
          "It addresses the challenge of fine-tuning large models on consumer hardware.",
          "High"),
         ("What is GBI in LEMA?",
-         "GBI stands for Binary Indexed Engagement.",
+         "GBI stands for Global Binary Index.",
          "It is a zero-copy mapping technique for `.safetensors` files using `mmap`.",
          "High"),
         ("Does LEMA support GPT-2?",

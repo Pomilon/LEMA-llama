@@ -47,6 +47,9 @@ def merge_adapter(checkpoint_dir: str, output_dir: str, base_model_path: str, re
         print(f"Error loading config: {e}")
         return
 
+    # Force STREAMING strategy for merge tool, regardless of checkpoint config
+    config.strategy = MemoryStrategy.STREAMING
+
     if not os.path.exists(config.gbi_path) and not os.path.exists(base_model_path):
         if os.path.exists(base_model_path):
             config.gbi_path = base_model_path
@@ -142,7 +145,7 @@ def merge_adapter(checkpoint_dir: str, output_dir: str, base_model_path: str, re
         
         # Load & Merge
         model.memory.prefetch_to_ram(layer_meta['id'], 0)
-        flat_buffer = model.memory.ram_flat_buffers[0]
+        flat_buffer = model.memory.ram_buffers[0]
         module = model.adapter.construct_layer_module(layer_meta['id'], flat_buffer, model.lora_manager)
         
         for _, child in module.named_modules():
@@ -181,7 +184,7 @@ def merge_adapter(checkpoint_dir: str, output_dir: str, base_model_path: str, re
     print(f"Processing Head & Norm (Shard {current_shard_idx})...")
     last_layer_id = layers[-1]['id']
     model.memory.prefetch_to_ram(last_layer_id, 0)
-    head_buffer = model.memory.ram_flat_buffers[0]
+    head_buffer = model.memory.ram_buffers[0]
     head_module = model.adapter.construct_layer_module(last_layer_id, head_buffer, model.lora_manager)
     
     current_shard_weights["model.norm.weight"] = head_module.norm.weight.data.clone().to(dtype=torch.float16)
