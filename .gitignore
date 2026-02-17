@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.vscode/
+.idea/
+
+# Project specific
+checkpoints/
+output/
+kaggle_logs/
+merged_model/
+*.safetensors
+*.bin
+*.pt
+*.log
+
+# Generated data
+data/*.jsonl
+kaggle/notebook.ipynb
+kaggle/inference_notebook.ipynb
+metadata-*.json
+kaggle/kernel-metadata.json
+kaggle/inference-metadata.json
+training-metadata.bak
+
+# Issues log (Private)
+LEMA_ISSUES.md

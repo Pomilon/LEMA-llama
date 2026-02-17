@@ -1,0 +1,11 @@
+transformers
+safetensors
+accelerate
+torch
+numpy
+sentencepiece
+protobuf
+requests
+tqdm
+typing_extensions
+kaggle
