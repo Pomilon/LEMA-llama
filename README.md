@@ -71,14 +71,11 @@ If the model outputs `[LEMA_REPLY]` and the correct fields, we know the fine-tun
 
 ```bash
 # Clone this repository
-git clone https://github.com/Pomilon/lema-demo.git
-cd lema-demo
+git clone https://github.com/Pomilon/LEMA-llama.git
+cd LEMA-llama
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Install LEMA (if not already installed)
-pip install -e ../LEMA
 ```
 
 ## Local Execution
