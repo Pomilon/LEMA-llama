@@ -41,14 +41,6 @@ def build_kaggle_notebook(output_path: str = "kaggle/notebook.ipynb"):
         "It sets up the environment, generates data, and runs the training loop."
     ))
     
-    # 2. Install dependencies
-    cells.append(create_code_cell([
-        "!pip install -q transformers safetensors accelerate",
-        "# Clone LEMA repository (using main branch for demo)",
-        "!git clone https://github.com/Pomilon/LEMA.git",
-        "!pip install -q -e LEMA/"
-    ]))
-    
     # 3. Directory Setup
     setup_dirs = [
         "import os",
@@ -75,6 +67,7 @@ def build_kaggle_notebook(output_path: str = "kaggle/notebook.ipynb"):
         ("utils/logging_utils.py", "utils/logging_utils.py"),
         ("data/build_dataset.py", "data/build_dataset.py"),
         ("training/train.py", "training/train.py"),
+        ("requirements.txt", "requirements.txt")
     ]
 
     for source_path, dest_path in files_to_write:
@@ -83,6 +76,11 @@ def build_kaggle_notebook(output_path: str = "kaggle/notebook.ipynb"):
         lines = [f"%%writefile {dest_path}"] + content.split('\n')
         cells.append(create_code_cell(lines))
     
+    cells.append(create_code_cell([
+        "# download all dependencies",
+        "!pip install -r requirements.txt"
+    ]))
+
     # 5. Generate Dataset
     cells.append(create_code_cell([
         "# Generate Dataset",
